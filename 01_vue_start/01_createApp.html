@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <style>
+    .orange {
+      color: orange;
+    }
+  </style>
+  <div id="app">
+    <!--v-bind: html의 속성인 id, class, style 등에 대해 model의 데이터를 연결할 때 사용-->
+    <div v-bind:class="{orange: active}">{{counter}}</div>
+    <!--v-on: dom 이벤트가 트리거될때 js를 실행할 수 있는 이벤트 리스너-->
+    <button v-on:click="increase">Click me!</button>
+  </div>
+  <script>
+    //create할 app의 상세
+    const App = {
+      // 각 옵션 정의: data, methods...
+      //data() 메소드이므로 객체 반환
+      data() {
+        return {
+          counter: 0,
+          active: true
+        }
+      },
+      //methods는 객체형태
+      methods: {
+        increase() {
+          this.counter += 1
+        }
+      },
+      // mounted() {
+      //   setInterval(() => {
+      //     this.counter += 1
+      //   }, 1000)
+      // }
+    };
+    //Vue.createApp으로 어플리케이션 생성
+    // mount할 dom 요소 (선택자) 지정
+    const app = Vue.createApp(App).mount("#app")
+  </script>
+</body>
+
+</html>
