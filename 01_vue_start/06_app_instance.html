@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">{{ msg }}</div>
+    <script>
+        // 애플리케이션: createApp 하여 만들어 진 앱
+        const app = Vue.createApp({
+            data() {
+                return {
+                    msg: 'Hello Vue!'
+                }
+            }
+        })
+        // 인스턴스 생성
+        const vm = app.mount('#app')
+        vm.msg = 'Good!'
+    </script>
+</body>
+</html>
