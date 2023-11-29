@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ msg }}</h1>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    msg: 'Hello Vue!'
+                }
+            },
+            //data()안의 데이터 업데이트되는 경우가 아니라 
+            // 반응성에 따라 화면이 업데이트되는 경우를 의미
+            beforeUpdate() {
+                console.log('beforeUpdate ', this.msg) // Bye?
+                console.log(document.querySelector('h1').textContent) // Hello Vue!
+            },
+            updated() {
+                console.log('updated ', this.msg) // Bye?
+                console.log(document.querySelector('h1').textContent) // Bye?
+            }
+        }
+        const app = Vue.createApp(App)
+        const vm = app.mount('#app')
+    </script>
+</body>
+</html>
