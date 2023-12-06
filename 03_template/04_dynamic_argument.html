@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <style>
+        .active {
+            color: orange;
+        }
+    </style>
+    <!--디렉티브: v-로 시작하는 속성-->  
+    <div id="app">
+        <h1 v-bind:[attr]="'active'">Hello Vue!</h1>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    attr:'class'
+                }
+            }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
