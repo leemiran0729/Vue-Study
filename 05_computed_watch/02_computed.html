@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ count }}</h1>
+        <h2>{{ double }}</h2>
+        <h2>{{ double }}</h2>
+        <h2>{{ double }}</h2>
+        <h2>{{ double }}</h2>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    count: 3
+                }
+            },
+            // computed는 캐싱 기능을 가지므로 methods에 선언하는 것보다 성능 good!
+            computed: {
+                double() {
+                    return this.count * 2
+                }
+            }
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
