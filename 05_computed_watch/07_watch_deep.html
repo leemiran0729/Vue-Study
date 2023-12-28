@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>{{user.age}}</h1>
+    <button @click="capitalize">대문자로</button>
+    <ul>
+        <li v-for="fruit in fruits">{{ fruit.name }}</li>
+    </ul>
+</div>
+<script>
+    const App = {
+        data() {
+            return {
+                user: {
+                    name: 'miran',
+                    age: 22
+                },
+                fruits: [
+                    {id:1, name:'Apple'},
+                    {id:2, name:'Banana'},
+                    {id:3, name:'Cherry'}
+                ]
+            }
+        },
+        watch: {
+            user: {
+                handler(newValue, oldValue) {
+                    console.log(newValue, oldValue)
+                },
+                deep:true
+            },
+            fruits: {
+                handler(newValue){
+                    console.log(newValue)
+                },
+                deep: true,
+                // 변경때문만 아니라 초기화될 때도 즉시 실행되게 함
+                immediate: true
+            }
+        },
+        methods: {
+            capitalize() {
+                this.fruits.forEach((fruit) => {fruit.name = fruit.name.toUpperCase()})
+            }
+        }
+    }
+
+    const vm = Vue.createApp(App).mount('#app')
+</script>
+</body>
+</html>
