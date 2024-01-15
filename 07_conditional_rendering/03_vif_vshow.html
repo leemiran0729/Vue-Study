@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="toggle">Toggle!</button>
+        <!--v-if는 요소 자체가 사라졌다가 생김, lazy함, 초기렌더링 비용이 낮음-->
+        <h1 v-if="isShow">Hello Vue!</h1>
+        <!--v-show는 요소는 그대로 있고 보였다가 안보였다함 (display 속성), 초기렌더링 비용이 높음(요소생성필수), 전환비용은 낮음-->
+        <h1 v-show="isShow">Hello Vue!</h1>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    isShow: true, 
+                }
+            },
+            methods: {
+                toggle() {
+                    this.isShow = !this.isShow
+                }
+            }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
