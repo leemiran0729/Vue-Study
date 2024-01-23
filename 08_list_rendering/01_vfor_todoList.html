@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--submit될 때, 새로고침되는 부분 방지: .prevent 추가 또는 함수이벤트
+        <form @submit.prevent="addNewTodo"> -->
+        <form @submit="addNewTodo">
+            <label for="new-todo">Add a todo</label>
+            <input v-model="newTodoText" id="new-todo" type="text" placeholder="해야할 일을 입력하시오."/>
+            <button>Add</button>
+        </form>
+        <ul>
+            <todo-item v-for="todo in todos" :key="todo.id" :todo="todo" />
+        </ul>
+    </div>
+    <script>
+        function generateId() {
+            return `${Date.now()}${Math.random()}`
+        }
+        const TodoItem = {
+            template: `
+            <li>
+                {{todo.title}}
+            <button @click="removeTodo(todo.id)">Remove</button>
+            </li>
+            `,
+            props: ['todo']
+        }
+        const App = {
+            components: {
+                TodoItem
+            },
+            data() {
+                return {
+                    newTodoText: '',
+                    todos: []
+                }
+            },
+            methods: {
+                addNewTodo(event) {
+                    event.preventDefault()
+                    this.todos.push({
+                        id: generateId(),
+                        title: this.newTodoText
+                    })
+                    this.newTodoText = ''
+                },
+                removeTodo(todoId){
+                    this.todos = this.todos.filter(todo => {
+                        return todo.id !== todoId
+                    })
+                }
+            }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
