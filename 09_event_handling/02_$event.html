@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <!--메서드에 매개변수가 없을 경우는 첫번째 파라미터로 event가 들어오지만,
+    인수가 있을 경우, event가 필요한 경우 인수로 $event를 넣어줘야함-->
+    <div id="app"><h1 @click="say('Hi', $event)">{{ msg }}</h1></div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    msg: 'Vue!'
+                }
+            },
+            methods: {
+                say(message, event) {
+                    console.log(event)
+                    console.log(event.target.textContent)
+                }
+            }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
