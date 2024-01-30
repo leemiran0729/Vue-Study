@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--
+            prevent: 기본 액션 수행 방지
+            once: 이벤트를 한번만 실행
+            ex) @click.prevent.once: 한번만 prevent하고 수행 시작!
+        -->
+        <a href="https://google.com" target="_blank" @click.prevent.once="log">Google</a>
+    </div>
+    <script>
+        /* window.addEventListener('load', () => {
+            const aEl = document.querySelector('a')
+            aEl.addEventListener('click', event => {
+                event.preventDefault()
+            })
+        })*/ 
+        const App = {
+            methods: {
+                log(event){
+                    console.log(event.target)
+                }
+            }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
