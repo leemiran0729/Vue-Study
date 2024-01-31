@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <style>
+        .parent {
+            width: 200px;
+            height: 100px;
+            background-color: royalblue;
+            padding: 20px;
+        }
+        .child {
+            width: 100px;
+            height: 80px;
+            background-color: orange;
+        }
+    </style>
+    <div id="app">
+        <!--capture: 부모요소 메소드부터 먼저 실행을 원할 경우-->
+        <div class="parent" @click.capture="log">
+            <!--stop: 이벤트 전파를 방지하기 위함-->
+            <div class="child" @click.stop="log"></div>
+        </div>
+    </div>
+    <script>
+        /* window.addEventListener('click', () => {
+            console.log('window!')
+        }, {capture: true})*/
+
+        const App = {
+        methods: {
+            log(event) {
+                console.log(event.currentTarget)
+            }
+        }   
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
