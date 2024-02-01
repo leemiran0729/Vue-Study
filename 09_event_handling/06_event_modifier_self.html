@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <style>
+        .parent {
+            width: 200px;
+            height: 100px;
+            background-color: royalblue;
+            padding: 20px;
+        }
+        .child {
+            width: 100px;
+            height: 80px;
+            background-color: orange;
+        }
+    </style>
+    <div id="app">
+        <!--self: currentTarget과 target이 일치하는 경우에만 실행-->
+        <div class="parent" @click.self="log">
+            <div class="child"></div>
+        </div>
+    </div>
+    <script>
+        const App = {
+        methods: {
+            log(event) {
+                // currentTarget: 이벤트 연결된 부분
+                console.log(event.currentTarget, event.target)
+            }
+        }   
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
