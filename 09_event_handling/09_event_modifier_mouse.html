@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--mouse left, middle, right로 구분하여 이벤트 핸들링 가능-->
+        <button @click.left="log">Click!</button>
+    </div>
+    <script>
+        const App = {
+            methods: {
+                log(event) {
+                    console.log(event)
+                }
+            }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
