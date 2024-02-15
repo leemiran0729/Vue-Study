@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="radio" v-model="picked" value="LEE">
+        <input type="radio" v-model="picked" value="SONG">
+        <input type="radio" v-model="picked" value="KIM">
+    </div>
+    <script>
+        const App = {
+           data() {
+            return {
+                picked: ''
+            }
+           },
+           watch: {
+            picked(newValue){
+                console.log(newValue)
+            }
+           }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
