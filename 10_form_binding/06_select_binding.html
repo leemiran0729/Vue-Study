@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <select v-model="selected">
+            <!--value를 넣지 않을 경우, option의 text가 value가 됨-->
+            <option value="">무엇을 먹을까요?</option>
+            <option value="chicken">치킨</option>
+            <option value="pizza">피자</option>
+            <option value="cake">케이크</option>
+        </select>
+
+        <select v-model="selected2">
+            <option value="">어떤 것을 먹을까요?</option>
+            <option v-for="food in foodList" :key="food.value" :value="food.value">{{food.text}}</option>
+        </select>
+        
+    </div>
+    <script>
+        const App = {
+           data() {
+            return {
+                selected: '',
+                selected2: '',
+                foodList: [
+                    {text: '치킨', value:'chicken'},
+                    {text:'피자', value:'pizza'},
+                    {text: '케이크', value:'cake'}
+                ]
+            }
+           },
+           watch: {
+            selected(newValue){
+                console.log(newValue)
+            },
+            selected2(newValue){
+                console.log(newValue)
+            }
+           }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
