@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--.number(수식어): 입력된 값이 숫자로 변환가능하면 변화됨-->
+        <input type="text" v-model.lazy.number="msg">
+        <h1>{{msg}}</h1>
+    </div>   
+    <script>
+        const App = {
+           data() {
+            return {
+                msg: 'Hello World!!!!'
+            }
+           },
+           watch: {
+            msg(newValue) {
+                console.log(typeof newValue)
+            }
+           }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
