@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--.trim(수식어): 입력한 값의 공백이 자동으로 제거됨-->
+        <input type="text" v-model.lazy.trim="msg">
+        <h1>{{msg}}</h1>
+    </div>   
+    <script>
+        const App = {
+           data() {
+            return {
+                msg: 'Hello World!!!!'
+            }
+           },
+           // 기존의 값이랑 trim한 값이 일치하면 watch 작동 안함
+           watch: {
+            msg(newValue) {
+                console.log(newValue)
+            }
+           }
+        }
+        const vm = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+</html>
