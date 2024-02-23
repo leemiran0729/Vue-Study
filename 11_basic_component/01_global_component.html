@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <upper-name name="hi"></upper-name>
+        <upper-name name="hello"></upper-name>
+        <upper-name name="bye"></upper-name>
+        <greeting-name v-for="greeting in greetings" :key="greeting.id" :name="greeting.name"></greeting-name>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    greetings: [
+                        {id: '1', name: 'hi'},
+                        {id: '2', name: 'hello'},
+                        {id: '3', name: 'bye'}
+                    ]
+                }
+            }
+        }
+        // 전역 컴포넌트 사용을 위해 createApp한 app에 component 정의하여 등록
+        const app = Vue.createApp(App)
+        app.component('upper-name', {
+            template: `<div>{{name}}</div>`,
+            // props: 컴포넌트 외부에서 컴포넌트 구성을 위해 필요한 값을 전달
+            props: ['name']
+        })
+        app.component('greeting-name', {
+            template: `<div @click="capitalize">{{name}}</div>`,
+            // props: 컴포넌트 외부에서 컴포넌트 구성을 위해 필요한 값을 전달
+            props: ['name'],
+            /* Attempting to mutate prop "name". Props are readonly.
+                props는 외부에서 가져오는 값으로 내부에서 변동시키기 어려움
+            */
+            methods: {
+                capitalize() {
+                    this.name = this.name.toUpperCase()
+                }
+            }
+        })
+        
+        // el 속성 = mount api: 인스턴스를 화면에 붙이는 역할
+        const vm = app.mount('#app')
+    </script>
+</body>
+</html>
