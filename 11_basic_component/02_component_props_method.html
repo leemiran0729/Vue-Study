@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <upper-name name="hi"></upper-name>
+        <upper-name name="hello"></upper-name>
+        <upper-name name="bye"></upper-name>
+        <greeting-name v-for="greeting in greetings" :key="greeting.id" :name="greeting.name" @to-upper="toUpper"></greeting-name>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    greetings: [
+                        {id: '1', name: 'hi'},
+                        {id: '2', name: 'hello'},
+                        {id: '3', name: 'bye'}
+                    ]
+                }
+            },
+            methods: {
+                toUpper(upperName){
+                    console.log(upperName)
+                }
+            }
+        }
+        
+        const app = Vue.createApp(App)
+
+        app.component('greeting-name', {
+            template: `<div @click="capitalize">{{name}}</div>`,
+            props: ['name'],
+            methods: {
+                capitalize() {
+                    /* emit: 데이터 전달을 위함 
+                    to-upper(사용자정의), 들어갈 값 순서대로 넣음
+                    들어가는 값은 외부에서 $event와 동일
+                    */
+                   this.$emit('to-upper', this.name.toUpperCase())
+                }
+            }
+        })
+        
+        // el 속성 = mount api: 인스턴스를 화면에 붙이는 역할
+        const vm = app.mount('#app')
+    </script>
+</body>
+</html>
